@@ -1,0 +1,27 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-ajax/core-ajax.html">
+<polymer-element name="japanese-sentence-service" attributes="n output">
+  <template>
+    <style>
+    :host {
+      display: none;
+    }
+    </style>
+    <core-ajax id="ajax"
+      auto
+      url="japanese-sentence-service.php?n={{n}}"
+      on-core-response="{{loaded}}"
+      handleAs="json">
+    </core-ajax>
+  </template>
+  <script>
+  Polymer('japanese-sentence-service', {
+    created: function() {
+      this.posts = [];
+    },
+    loaded: function() {
+      this.output = this.$.ajax.response;
+    },
+  });
+  </script>
+</polymer-element>

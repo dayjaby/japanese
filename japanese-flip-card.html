@@ -1,0 +1,44 @@
+<link rel="import" href="../components/polymer/polymer.html">
+
+
+<polymer-element name="japanese-flip-card" attributes="jp eng which">
+  <template>
+  <style>
+    :host {
+      display: block;
+      position: relative;
+      background-color: white;
+      padding: 1%;
+      padding-right: 3%;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+  #layout { align: left; }
+  </style>
+  <div vertical layout>
+  <div horizontal layout class="layout">
+    <button on-click="{{toggle}}">#</button>
+    <button on-click="{{callsave}}">*</button>
+    <span id="txt">{{value}}</span>
+    <div flex></div>
+  </div>
+  <input type="field">
+  </div>
+  </template>
+  <script>
+  Polymer({
+    which: false,
+    ready: function() {
+      this.value = this.which ? this.eng : this.jp;
+    },
+    toggle: function() {
+      this.which = !this.which;
+      this.$.txt.innerHTML = this.which ? this.eng : this.jp;      
+    },
+    callsave: function() {
+      this.fire('save',{eng:this.eng,jp:this.jp});
+    }
+  });
+  </script>
+</polymer-element>
